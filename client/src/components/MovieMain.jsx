@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axiosInstance from "../utils/axiosInstance"; // Ensure axiosInstance is configured to handle authenticated requests
+import axiosInstance from "../utils/axiosInstance";
+import { AuthContext } from "../utils/AuthContext.js";
 import { useSharedState } from "../SharedContext.js";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 
 const API_KEY = "07b4e7818081deeb46a009a35c0d4535"; // Your TMDb API key
 
@@ -10,7 +12,10 @@ function MovieMain() {
   const [moviesData, setMoviesData] = useState([]);
   const { cartItems, setCartItems } = useSharedState();
   const [expanded, setExpanded] = useState({});
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
+  const { authTokens } = useContext(AuthContext);
+  const accessToken = localStorage.getItem("access_token");
+  const refreshToken = localStorage.getItem("refresh_token");
 
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
@@ -40,21 +45,32 @@ function MovieMain() {
     }
   }, [searchTerm]);
 
-  function addToMyList(movie) {
-    axiosInstance
-      .post("/api/movies/add_movie/", {
-        title: movie.title,
-        description: movie.description,
-        cover_image: movie.cover_image,
-        release_date: movie.release_date,
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error adding movie to list:", error);
-      });
+  async function addToMyList(movie) {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/users/add_movie/",
+        {
+          title: movie.title,
+          description: movie.description,
+          cover_image: movie.cover_image,
+          release_date: movie.release_date,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, // Use access token for authentication
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      if (error.response) {
+        console.error("Error adding movie to list:", error.response.data);
+      } else {
+        console.error("Error adding movie to list:", error.message);
+      }
+    }
   }
+
   function toggleDescription(id) {
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
   }
