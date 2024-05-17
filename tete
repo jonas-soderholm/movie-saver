@@ -1,0 +1,35 @@
+Create an online bookstore using Django.
+The bookstroe should allow users to browse search purchase and review books
+
+Book model:
+
+#title (CharField)
+#author (CharField)
+#description (TextField)
+#price (DecimalField)
+#publication_date (DateField)
+#cover_image (imageField) - Optional
+
+Book views:
+
+Create views to display books:
+#List all books
+#View details of a book
+#Search for books by title, author, or keyword.
+
+Book purchase:
+
+Implement functionality for user to purchase books... (Optional)
+#Add books to a shopping cart
+#View and manage items in the shopping cart
+
+User authentication:
+
+#implement user authentication to allow user to register log in, and manage their profiles.
+#Only authenticated users should purchase books and write reviews.
+
+Admin panel:
+
+#Provide an admin interface to manage books, order and user accounts.
+
+You have until monday to finish the project
