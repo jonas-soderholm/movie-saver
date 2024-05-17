@@ -52,3 +52,11 @@ def add_movie(request):
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+
+@api_view(['GET'])
+def user_movies(request):
+    user = request.user
+    user_movies = Movie.objects.filter(usermovie__user=user)  # Query the Movie model
+    serializer = MovieSerializer(user_movies, many=True)
+    return Response(serializer.data)
