@@ -39,7 +39,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-              Username
+              Username tjatjaj lolool@exmample.com asdasd1234!!asdas
             </label>
             <input
               type="text"
