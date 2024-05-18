@@ -11,6 +11,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.decorators import api_view
 User = get_user_model()
+from django.db import IntegrityError
 
 class CreateUserView(generics.CreateAPIView):
     model = User
@@ -54,6 +55,7 @@ def add_movie(request):
         return Response({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
     
 
+
 @api_view(['GET'])
 def user_movies(request):
     user = request.user
@@ -62,11 +64,28 @@ def user_movies(request):
     return Response(serializer.data)
 
 
+# @api_view(['DELETE'])
+# def remove_movie(request, movie_id):
+#     try:
+#         user_movie = UserMovie.objects.get(user=request.user, movie__id=movie_id)
+#         user_movie.delete()
+#         return Response({'message': 'Movie removed from list'}, status=status.HTTP_204_NO_CONTENT)
+#     except UserMovie.DoesNotExist:
+#         return Response({'error': 'Movie not found in user list'}, status=status.HTTP_404_NOT_FOUND)
+#     except Exception as e:
+#         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['DELETE'])
 def remove_movie(request, movie_id):
     try:
         user_movie = UserMovie.objects.get(user=request.user, movie__id=movie_id)
+        movie = user_movie.movie
         user_movie.delete()
+        
+        # Check if there are any other UserMovie entries for this movie
+        if not UserMovie.objects.filter(movie=movie).exists():
+            movie.delete()
+        
         return Response({'message': 'Movie removed from list'}, status=status.HTTP_204_NO_CONTENT)
     except UserMovie.DoesNotExist:
         return Response({'error': 'Movie not found in user list'}, status=status.HTTP_404_NOT_FOUND)
