@@ -1,72 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import axiosInstance from "../utils/axiosInstance";
-// import { useNavigate } from "react-router-dom";
-
-// const UserProfile = () => {
-//   const [user, setUser] = useState(null);
-//   const [movies, setMovies] = useState([]);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     const fetchUser = async () => {
-//       try {
-//         const response = await axiosInstance.get("users/me/");
-//         setUser(response.data);
-//         // Fetch user movies after fetching user data
-//         fetchUserMovies();
-//       } catch (error) {
-//         navigate("/login");
-//         console.error("You need to login", error);
-//       }
-//     };
-
-//     fetchUser();
-//   }, [navigate]);
-
-//   const fetchUserMovies = async () => {
-//     try {
-//       const response = await axiosInstance.get("users/movies/");
-//       setMovies(response.data);
-//       console.log(response.data);
-//     } catch (error) {
-//       console.error("Error fetching user's movies", error);
-//     }
-//   };
-
-//   const openMovieDetails = (movie) => {
-//     const movieDetails = `
-//       Title: ${movie.title}
-//       Description: ${movie.description}
-//       Release Date: ${movie.release_date}
-//     `;
-//     alert(movieDetails);
-//   };
-
-//   if (!user) return <div></div>;
-
-//   return (
-//     <div className="container mx-auto px-4 py-8">
-//       <h1 className="text-3xl font-bold mb-4 text-center">Welcome, {user.username}</h1>
-//       <p className="text-lg mb-4 text-center">Email: {user.email}</p>
-//       <h2 className="text-2xl font-bold mb-4 text-center">Your saved movies/series</h2>
-//       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center items-center">
-//         {movies.map((movie) => (
-//           <div
-//             key={movie.id}
-//             className="bg-white rounded-lg overflow-hidden shadow-lg cursor-pointer"
-//             onClick={() => openMovieDetails(movie)}
-//           >
-//             <img src={movie.cover_image} alt={movie.title} className="w-full h-32 object-cover" />
-//             <div className="p-2">
-//               <h3 className="text-sm font-semibold mb-1">{movie.title}</h3>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
 // export default UserProfile;
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
@@ -139,8 +70,8 @@ const UserProfile = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-4 text-center">Welcome, {user.username}</h1>
       <p className="text-lg mb-4 text-center">Email: {user.email}</p>
-      <h2 className="text-2xl font-bold mb-4 text-center">Your saved movies/series</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center items-center">
+      <h2 className="text-2xl font-bold mb-4 text-center pt-12">Your saved movies/series</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center items-center pt-2">
         {movies.map((movie) => (
           <div
             key={movie.id}

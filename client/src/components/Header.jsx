@@ -8,15 +8,20 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartItems, setCartItems } = useSharedState(); // State to keep track of cart items
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  useEffect(() => {}, [cartItems]);
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    setIsLoggedIn(!!accessToken);
+  }, []);
 
   function logoutHandler() {
     logout();
+    setIsLoggedIn(false);
     navigate("/login");
   }
 
@@ -29,28 +34,25 @@ function Header() {
           </a>
         </div>
         <div className="flex items-center md:gap-10 gap-4">
-          <div className="relative">
-            <a href="/cart">
-              <FaShoppingCart className="h-[1.5rem] w-full" />
-            </a>
-            {cartItems.length > 0 && ( // Display number of items if cart is not empty
-              <div className="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white rounded-full w-4 h-4 text-center text-xs pointer-events-none">
-                {cartItems.length}
-              </div>
-            )}
-          </div>
-          <a href="/login" className="md:text-1xl text-1xl text-slate-200">
-            Login
-          </a>
-          <a href="/signup" className="md:text-1xl text-1xl text-slate-200">
-            Sign up
-          </a>
-          <a onClick={logoutHandler} href="/logout" className="md:text-1xl text-1xl text-slate-200">
-            Logout
-          </a>
           <a href="/profile" className="md:text-1xl text-1xl text-slate-200">
             My Profile
           </a>
+          {isLoggedIn ? (
+            <>
+              <a onClick={logoutHandler} className="md:text-1xl text-1xl text-slate-200 cursor-pointer">
+                Logout
+              </a>
+            </>
+          ) : (
+            <>
+              <a href="/login" className="md:text-1xl text-1xl text-slate-200">
+                Login
+              </a>
+              {/* <a href="/signup" className="md:text-1xl text-1xl text-slate-200">
+                Sign up
+              </a> */}
+            </>
+          )}
         </div>
       </div>
     </header>

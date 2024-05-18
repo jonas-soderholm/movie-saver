@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}", // Adjust as needed for file types you use
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Montserrat", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

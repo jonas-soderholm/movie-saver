@@ -22,7 +22,7 @@ const Login = () => {
 
       // Redirect to profile page
       console.log("GO TO PROFILE");
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       if (error.response) {
         console.error("There was an error logging in!", error.response.data);

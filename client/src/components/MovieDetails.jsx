@@ -20,7 +20,7 @@ function MovieDetails() {
           description: response.data.overview,
           cover_image: `https://image.tmdb.org/t/p/w500${response.data.poster_path}`,
           release_date: response.data.release_date,
-          price: "N/A", // TMDb API doesn't provide price info
+          price: "N/A",
         });
       })
       .catch((error) => {
@@ -45,7 +45,6 @@ function MovieDetails() {
         <div>
           <img src={movie.cover_image} alt={movie.title} className="mb-2 h-[10rem] mx-auto rounded-md" />
           <h3 className="text-xl font-semibold">{movie.title}</h3>
-          <p className="text-gray-700">Price: {movie.price}</p>
           <p className="text-gray-700">Release Date: {movie.release_date}</p>
           <p className="text-gray-700">{movie.description}</p>
         </div>
