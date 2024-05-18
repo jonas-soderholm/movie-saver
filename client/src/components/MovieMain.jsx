@@ -185,7 +185,7 @@ function MovieMain() {
   async function addToMyList(movie) {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/add_movie/",
+        `${process.env.REACT_APP_API_BASE_URL}/users/add_movie/`,
         {
           title: movie.title,
           description: movie.description,

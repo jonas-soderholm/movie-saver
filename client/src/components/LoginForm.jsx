@@ -11,7 +11,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/api/token/", {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/token/`, {
         username,
         password,
       });
@@ -23,6 +23,7 @@ const Login = () => {
       // Redirect to profile page
       console.log("GO TO PROFILE");
       navigate("/");
+      window.location.reload();
     } catch (error) {
       if (error.response) {
         console.error("There was an error logging in!", error.response.data);

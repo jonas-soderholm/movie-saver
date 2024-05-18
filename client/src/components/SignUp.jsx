@@ -12,7 +12,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/api/users/signup/", {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/signup/`, {
         username,
         password,
         email,
@@ -22,8 +22,22 @@ const SignUp = () => {
     } catch (error) {
       if (error.response) {
         console.error("There was an error signing up!", error.response.data);
+
+        const data = error.response.data;
+        if (data.email && data.email[0] === "Email is already in use.") {
+          setError("Email is already in use.");
+        } else if (data.username && data.username[0] === "Username already exists.") {
+          setError("Username already exists.");
+        } else if (data.email) {
+          setError("Your email is in an incorrect format.");
+        } else if (data.password) {
+          setError("Password is invalid.");
+        } else {
+          setError("Username already exists.");
+        }
       } else {
         console.error("There was an error signing up!", error.message);
+        setError("An error occurred. Please try again.");
       }
     }
   };
@@ -75,24 +89,10 @@ const SignUp = () => {
               required
             />
           </div>
-          {/* <div className="mb-6">
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div> */}
           <div className="text-sm mb-4">
             <span>
-              <a className=" font-thin">Already have an account? </a>
-              <a href="/login" className=" text-blue-600">
+              <a className="font-thin">Already have an account? </a>
+              <a href="/login" className="text-blue-600">
                 Login
               </a>
             </span>
@@ -113,7 +113,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-// user tjatjaj lolool@exmample.com    asdasd1234!!asdas
-// user tjatjaj222 lolool222@exmample.com    asdasd1234!!asdas
-// user tjatjaj2 lolool222@exmample.com    asdasd1234!!asdas
-// user tjatjaj233 lolool22233@exmample.com    asdasd1234!!asdas
