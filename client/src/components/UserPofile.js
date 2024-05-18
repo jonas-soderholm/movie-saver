@@ -69,29 +69,45 @@ const UserProfile = () => {
       <h2 className="text-2xl font-bold mb-4 text-center pt-12">Your saved movies/series</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center items-center pt-2">
         {movies.map((movie) => (
-          <div key={movie.id} className="bg-white rounded-lg overflow-hidden shadow-lg relative">
+          <div
+            key={movie.id}
+            className="bg-white rounded-lg overflow-hidden shadow-lg relative flex flex-col"
+            style={{ height: "220px" }} // Set a fixed height for the card
+          >
             <img src={movie.cover_image} alt={movie.title} className="w-full h-32 object-cover" />
-            <div className="p-2">
-              <h3 className="text-sm font-semibold mb-1">{movie.title}</h3>
+            <div className="p-2 flex-1 flex flex-col justify-between">
+              <h3
+                className="text-sm font-semibold mb-1 overflow-hidden text-overflow-ellipsis"
+                style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 2,
+                  overflow: "hidden",
+                }}
+              >
+                {movie.title}
+              </h3>
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openMovieDetails(movie);
+                  }}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md md:text-sm text-[0.7rem]"
+                >
+                  More Info
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeFromMyList(movie.id);
+                  }}
+                  className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md md:text-sm text-[0.7rem]"
+                >
+                  Remove
+                </button>
+              </div>
             </div>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                openMovieDetails(movie);
-              }}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md absolute top-2 left-2 text-sm"
-            >
-              More Info
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                removeFromMyList(movie.id);
-              }}
-              className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md absolute top-2 right-2 text-sm"
-            >
-              Remove
-            </button>
           </div>
         ))}
       </div>
