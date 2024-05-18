@@ -60,3 +60,15 @@ def user_movies(request):
     user_movies = Movie.objects.filter(usermovie__user=user)  # Query the Movie model
     serializer = MovieSerializer(user_movies, many=True)
     return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def remove_movie(request, movie_id):
+    try:
+        user_movie = UserMovie.objects.get(user=request.user, movie__id=movie_id)
+        user_movie.delete()
+        return Response({'message': 'Movie removed from list'}, status=status.HTTP_204_NO_CONTENT)
+    except UserMovie.DoesNotExist:
+        return Response({'error': 'Movie not found in user list'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
