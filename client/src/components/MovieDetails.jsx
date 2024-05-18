@@ -47,12 +47,6 @@ function MovieDetails() {
           <p className="text-gray-700">Release Date: {movie.release_date}</p>
           <p className="text-gray-700">{movie.description}</p>
         </div>
-        <button
-          onClick={() => addToMyList(movie)}
-          className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md mt-4"
-        >
-          Add to My List
-        </button>
       </div>
     </div>
   );

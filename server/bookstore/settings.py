@@ -1,20 +1,22 @@
 from pathlib import Path
 from datetime import timedelta
+import os
 
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-skuu4^oc78r#q%(d%l^7l#p)q)o06c4&zx@y6&f7!i!m7o&$ux'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your_default_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -32,11 +34,9 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:1500",
-]
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', '').split(',')
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', 'False') == 'True'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -66,7 +66,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
-
 
 TEMPLATES = [
     {

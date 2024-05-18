@@ -24,7 +24,7 @@ function MovieMain() {
         await axiosInstance.get("users/me/");
         fetchUserMovies();
       } catch (error) {
-        navigate("/login");
+        // navigate("/login");
         console.error("You need to login", error);
       }
     };
@@ -112,7 +112,7 @@ function MovieMain() {
   return (
     <>
       <div className="text-2xl text-center pt-[2rem]">Search for any movie or series</div>
-      <div className="text-2xl text-center pb-[1rem]">And save them to your profile</div>
+      <div className="text-2xl text-center pb-[1rem]">and save them to your profile</div>
       <div className="flex flex-wrap justify-center py-[6rem] text-sm gap-10 mx-4">
         <input
           type="text"
