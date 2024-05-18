@@ -32,7 +32,6 @@ function MovieDetails() {
     const newCartItems = [...cartItems, movie];
     setCartItems(newCartItems);
     localStorage.setItem("cartItems", JSON.stringify(newCartItems));
-    console.log(newCartItems);
   }
 
   if (!movie) {

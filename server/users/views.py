@@ -33,12 +33,40 @@ class UserDetailView(generics.RetrieveAPIView):
         return self.request.user
     
 
+# @api_view(['POST'])
+# def add_movie(request):
+#     if request.method == 'POST':
+#         user = request.user  # Assuming the user is authenticated
+#         data = request.data
+#         try:
+#             movie = Movie.objects.create(
+#                 title=data['title'],
+#                 description=data['description'],
+#                 cover_image=data['cover_image'],
+#                 release_date=data['release_date'],
+#                 price=data.get('price', 'N/A')
+#             )
+#             user_movie = UserMovie.objects.create(user=user, movie=movie)
+#             serializer = MovieSerializer(movie)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         except Exception as e:
+#             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+#     else:
+#         return Response({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+
+
 @api_view(['POST'])
 def add_movie(request):
     if request.method == 'POST':
         user = request.user  # Assuming the user is authenticated
         data = request.data
         try:
+            # Check if a movie with the same title already exists
+            if Movie.objects.filter(title=data['title']).exists():
+                return Response({'error': 'A movie with this title already exists'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Create the new movie
             movie = Movie.objects.create(
                 title=data['title'],
                 description=data['description'],
@@ -46,14 +74,18 @@ def add_movie(request):
                 release_date=data['release_date'],
                 price=data.get('price', 'N/A')
             )
+            
+            # Associate the movie with the user
             user_movie = UserMovie.objects.create(user=user, movie=movie)
+            
+            # Serialize the movie and return the response
             serializer = MovieSerializer(movie)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-    
 
 
 @api_view(['GET'])

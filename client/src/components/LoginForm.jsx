@@ -15,20 +15,16 @@ const Login = () => {
         username,
         password,
       });
-      console.log(response.data);
-      // Save the token in local storage or state
       localStorage.setItem("access_token", response.data.access);
       localStorage.setItem("refresh_token", response.data.refresh);
 
-      // Redirect to profile page
-      console.log("GO TO PROFILE");
       navigate("/");
       window.location.reload();
     } catch (error) {
-      if (error.response) {
-        console.error("There was an error logging in!", error.response.data);
+      if (error.response && error.response.status === 401) {
+        setError("Incorrect username or password.");
       } else {
-        console.error("There was an error logging in!", error.message);
+        // console.error("There was an error logging in!", error.message);
       }
     }
   };
@@ -39,9 +35,7 @@ const Login = () => {
       <div className="rounded bg-white p-8 shadow-md w-auto">
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-              Username tjatjaj lolool@exmample.com asdasd1234!!asdas
-            </label>
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700"></label>
             <input
               type="text"
               id="username"

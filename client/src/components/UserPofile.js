@@ -28,7 +28,6 @@ const UserProfile = () => {
     try {
       const response = await axiosInstance.get("users/movies/");
       setMovies(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error("Error fetching user's movies", error);
     }
@@ -49,7 +48,6 @@ const UserProfile = () => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log(response.data);
       fetchUserMovies();
     } catch (error) {
       if (error.response) {
@@ -64,7 +62,7 @@ const UserProfile = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4 text-center">Welcome, {user.username}</h1>
+      <h1 className="text-3xl font-bold mb-4 text-center">Welcome, {user.username}!</h1>
       <p className="text-lg mb-4 text-center">Email: {user.email}</p>
       <h2 className="text-2xl font-bold mb-4 text-center pt-12">Your saved movies/series</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center items-center pt-2">

@@ -17,7 +17,6 @@ const SignUp = () => {
         password,
         email,
       });
-      console.log(response.data);
       navigate("/login");
     } catch (error) {
       if (error.response) {
