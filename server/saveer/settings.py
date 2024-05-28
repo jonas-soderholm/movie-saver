@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'bookstore.urls'
+ROOT_URLCONF = 'saveer.urls'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 SIMPLE_JWT = {
@@ -83,7 +83,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bookstore.wsgi.application'
+WSGI_APPLICATION = 'saveer.wsgi.application'
 
 
 # Database
