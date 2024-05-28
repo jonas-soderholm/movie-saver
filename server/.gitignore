@@ -5,7 +5,7 @@ venv/
 .env
 
 # Ignore SQLite database file
-*.sqlite3
+db.sqlite3
 
 # Ignore compiled Python bytecode
 __pycache__/
