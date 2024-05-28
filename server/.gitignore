@@ -1,0 +1,28 @@
+# Ignore virtual environment
+venv/
+
+# Ignore environment variables file
+.env
+
+# Ignore SQLite database file
+*.sqlite3
+
+# Ignore compiled Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore local settings (e.g., settings_local.py)
+**/local_settings.py
+
+# Ignore media files (user-uploaded content)
+media/
+
+# Ignore static files (collected static files)
+staticfiles/
+
+# Ignore logs
+*.log
+
+# Ignore backup files
+*.bak
+*.backup

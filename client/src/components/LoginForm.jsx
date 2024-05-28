@@ -24,7 +24,7 @@ const Login = () => {
       if (error.response && error.response.status === 401) {
         setError("Incorrect username or password.");
       } else {
-        // console.error("There was an error logging in!", error.message);
+        console.error("There was an error logging in!", error.message);
       }
     }
   };

@@ -96,6 +96,19 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'saveer',           # Database name
+#         'USER': 'doadmin',          # MySQL username
+#         'PASSWORD': 'AVNS_UQFxwVZHBuYxHGitN7W',  # MySQL password
+#         'HOST': 'db-mysql-fra1-80836-do-user-15906176-0.c.db.ondigitalocean.com',  # MySQL host
+#         'PORT': '25060',            # MySQL port
+#         'OPTIONS': {
+#             'ssl': {'sslmode': 'REQUIRED'},  # SSL mode
+#         }
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
