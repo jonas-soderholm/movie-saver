@@ -18,4 +18,4 @@ COPY . /app/
 EXPOSE 7000
 
 
-CMD ["gunicorn", "--bind", "0.0.0.0:7000", "bookstore.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:7000", "saveer.wsgi:application"]

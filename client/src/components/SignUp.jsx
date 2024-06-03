@@ -11,6 +11,14 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Invalid email format.");
+      return;
+    }
+
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/signup/`, {
         username,
@@ -23,16 +31,16 @@ const SignUp = () => {
         console.error("There was an error signing up!", error.response.data);
 
         const data = error.response.data;
-        if (data.email && data.email[0] === "Email is already in use.") {
+        if (data.email && data.email[0].includes("already in use")) {
           setError("Email is already in use.");
-        } else if (data.username && data.username[0] === "Username already exists.") {
+        } else if (data.username && data.username[0].includes("already exists")) {
           setError("Username already exists.");
-        } else if (data.email) {
+        } else if (data.email && data.email[0].includes("incorrect format")) {
           setError("Your email is in an incorrect format.");
-        } else if (data.password) {
+        } else if (data.password && data.password[0].includes("invalid")) {
           setError("Password is invalid.");
         } else {
-          setError("Username already exists.");
+          setError("An error occurred. Please try again.");
         }
       } else {
         console.error("There was an error signing up!", error.message);
