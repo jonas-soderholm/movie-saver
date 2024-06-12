@@ -13,6 +13,7 @@ from rest_framework.decorators import api_view
 User = get_user_model()
 from django.db import IntegrityError
 
+
 class CreateUserView(generics.CreateAPIView):
     model = User
     permission_classes = [AllowAny]
@@ -33,33 +34,11 @@ class UserDetailView(generics.RetrieveAPIView):
         return self.request.user
     
 
-# @api_view(['POST'])
-# def add_movie(request):
-#     if request.method == 'POST':
-#         user = request.user  # Assuming the user is authenticated
-#         data = request.data
-#         try:
-#             movie = Movie.objects.create(
-#                 title=data['title'],
-#                 description=data['description'],
-#                 cover_image=data['cover_image'],
-#                 release_date=data['release_date'],
-#                 price=data.get('price', 'N/A')
-#             )
-#             user_movie = UserMovie.objects.create(user=user, movie=movie)
-#             serializer = MovieSerializer(movie)
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         except Exception as e:
-#             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-#     else:
-#         return Response({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-    
-
 
 @api_view(['POST'])
 def add_movie(request):
     if request.method == 'POST':
-        user = request.user  # Assuming the user is authenticated
+        user = request.user
         data = request.data
         try:
             # Check if a movie with the same title already exists
@@ -91,21 +70,11 @@ def add_movie(request):
 @api_view(['GET'])
 def user_movies(request):
     user = request.user
-    user_movies = Movie.objects.filter(usermovie__user=user)  # Query the Movie model
+    user_movies = Movie.objects.filter(usermovie__user=user)
     serializer = MovieSerializer(user_movies, many=True)
     return Response(serializer.data)
 
 
-# @api_view(['DELETE'])
-# def remove_movie(request, movie_id):
-#     try:
-#         user_movie = UserMovie.objects.get(user=request.user, movie__id=movie_id)
-#         user_movie.delete()
-#         return Response({'message': 'Movie removed from list'}, status=status.HTTP_204_NO_CONTENT)
-#     except UserMovie.DoesNotExist:
-#         return Response({'error': 'Movie not found in user list'}, status=status.HTTP_404_NOT_FOUND)
-#     except Exception as e:
-#         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
 def remove_movie(request, movie_id):

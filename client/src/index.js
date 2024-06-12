@@ -26,10 +26,7 @@ root.render(
               <Routes>
                 <Route path="/" element={<MovieMain />} />
                 <Route path="/login" element={<Login />} />
-                {/* <Route path="/signup" element={<SignUp />} /> */}
-                {/* <Route path="/profile" element={<UserProfile />} /> */}
                 <Route path="/profile" element={<UserProfile />} />
-                {/* <Route path="/login" element={<Login />} /> */}
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/movies/:movieId" element={<MovieDetails />} />
               </Routes>

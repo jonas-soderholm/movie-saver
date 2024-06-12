@@ -31,11 +31,13 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center justify-center py-[4rem] mx-2">
-      <div className="py-4 text-2xl font-bold">LOG IN</div>
+      <div className="py-4 text-2xl font-bold text-slate-200">LOG IN</div>
       <div className="rounded bg-white p-8 shadow-md w-auto">
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700"></label>
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+              Username
+            </label>
             <input
               type="text"
               id="username"

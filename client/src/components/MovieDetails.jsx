@@ -39,13 +39,13 @@ function MovieDetails() {
   }
 
   return (
-    <div className="flex justify-center py-[8rem] text-sm mx-4">
-      <div className="w-[25rem] h-auto bg-gray-100 p-4 rounded-lg shadow-md flex flex-col justify-between">
+    <div className="flex justify-center py-[8rem] text-sm mx-4 text-slate-200">
+      <div className="w-[25rem] h-auto dark:bg-neutral-800 p-4 rounded-lg shadow-md flex flex-col justify-between">
         <div>
           <img src={movie.cover_image} alt={movie.title} className="mb-2 h-[10rem] mx-auto rounded-md" />
           <h3 className="text-xl font-semibold">{movie.title}</h3>
-          <p className="text-gray-700">Release Date: {movie.release_date}</p>
-          <p className="text-gray-700">{movie.description}</p>
+          <p className="">Release Date: {movie.release_date}</p>
+          <p className="">{movie.description}</p>
         </div>
       </div>
     </div>

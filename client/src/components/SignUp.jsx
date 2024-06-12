@@ -51,7 +51,7 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col items-center justify-center py-[4rem]">
-      <div className="py-4 text-2xl font-bold">SIGN UP</div>
+      <div className="py-4 text-2xl font-bold text-slate-200">SIGN UP</div>
       <div className="rounded bg-white p-8 shadow-md w-96">
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

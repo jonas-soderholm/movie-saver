@@ -111,8 +111,8 @@ function MovieMain() {
 
   return (
     <>
-      <div className="text-2xl text-center pt-[2rem]">Search for any movie or series</div>
-      <div className="text-2xl text-center pb-[1rem]">and save them to your profile</div>
+      <div className="text-2xl text-center pt-[2rem] text-slate-200">Search for any movie or series</div>
+      <div className="text-2xl text-center pb-[1rem] text-slate-200">and save them to your profile</div>
       <div className="flex flex-wrap justify-center py-[6rem] text-sm gap-10 mx-4">
         <input
           type="text"
@@ -126,13 +126,13 @@ function MovieMain() {
           return (
             <div
               key={movie.id}
-              className="w-[25rem] h-auto bg-gray-100 p-4 rounded-lg shadow-md mb-4 mr-4 flex flex-col justify-between"
+              className="w-[25rem] h-auto dark:bg-neutral-800 text-slate-200 p-4 rounded-lg shadow-md mb-4 mr-4 flex flex-col justify-between"
             >
               <div>
                 <img src={movie.cover_image} alt={movie.title} className="mb-2 h-[10rem] mx-auto rounded-md" />
                 <h3 className="text-xl font-semibold">{movie.title}</h3>
-                <p className="text-gray-700">Release Date: {movie.release_date}</p>
-                <p className="text-gray-700">
+                <p className="">Release Date: {movie.release_date}</p>
+                <p className="">
                   {expanded[movie.id] ? movie.description : `${movie.description.substring(0, 100)}...`}
                 </p>
               </div>

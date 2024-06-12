@@ -61,7 +61,7 @@ const UserProfile = () => {
   if (!user) return <div></div>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8  text-slate-200">
       <h1 className="text-3xl font-bold mb-4 text-center">Welcome, {user.username}!</h1>
       <p className="text-lg mb-4 text-center">Email: {user.email}</p>
       <h2 className="text-2xl font-bold mb-4 text-center pt-12">Your saved movies/series</h2>
@@ -69,7 +69,7 @@ const UserProfile = () => {
         {movies.map((movie) => (
           <div
             key={movie.id}
-            className="bg-white rounded-lg overflow-hidden shadow-lg relative flex flex-col"
+            className="dark:bg-neutral-800 rounded-lg overflow-hidden shadow-lg relative flex flex-col"
             style={{ height: "220px" }} // Set a fixed height for the card
           >
             <img src={movie.cover_image} alt={movie.title} className="w-full h-32 object-cover" />
@@ -111,8 +111,8 @@ const UserProfile = () => {
       </div>
 
       {selectedMovie && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg overflow-hidden shadow-lg max-w-md w-full p-4">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 ">
+          <div className="rounded-lg overflow-hidden shadow-lg max-w-md w-full p-4 dark:bg-neutral-800">
             <h2 className="text-xl font-bold mb-4">{selectedMovie.title}</h2>
             <p className="mb-2">
               <strong>Description:</strong> {selectedMovie.description}
